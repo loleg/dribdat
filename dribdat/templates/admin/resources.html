@@ -1,0 +1,50 @@
+{% extends "admin/layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Resources</h2>
+    <table class='table table-bordered table-hover'>
+        <thead>
+            <tr>
+              <th>Name</th>
+              <th>Project</th>
+              <th>Created</th>
+            </tr>
+        </thead>
+        {% for resource in resources or data.items %}
+        <tr>
+            <td width="50%">
+              <a href="{{ url_for('admin.resource_view', resource_id=resource.id) }}">
+                {{ resource.name }}
+              </a>
+            </td>
+            <td>{{ resource.project.name }}</td>
+            <td>{{ resource.created_at|since_date }}</td>
+            <td><div class="btn-group">
+              <a href="{{ url_for('project.resource_view', resource_id=resource.id) }}" class="btn btn-sm btn-primary">
+                Edit
+              </a>
+              {% if not resource.is_visible %}
+                <a href="{{ url_for('admin.resource_toggle', resource_id=resource.id) }}" class="btn btn-sm btn-success">
+                  Enable
+                </a>
+              {% else %}
+                {% if resource.sync_content %}
+                <a href="{{ url_for('project.resource_autoupdate', resource_id=resource.id) }}" class="btn btn-sm btn-warning">
+                  Sync
+                </a>
+                {% endif %}
+                <a href="{{ url_for('admin.resource_toggle', resource_id=resource.id) }}" title="Hide" class="btn btn-sm btn-danger"
+                   onclick="if(!window.confirm('Are you sure you wish to hide this resource?')) return false">
+                  <i class="fa fa-eye"></i>
+                </a>
+              {% endif %}
+            </div></td>
+        </tr>
+        {% endfor %}
+    </table>
+  {% if data %}
+    {% include "includes/pagination.html" %}
+  {% endif %}
+</div>
+{% endblock %}
