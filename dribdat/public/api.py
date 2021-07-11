@@ -1,9 +1,26 @@
  # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, redirect, url_for, make_response, request, flash, jsonify, current_app
+from flask import (
+    Blueprint,
+    current_app
+    flash,
+    jsonify,
+    make_response,
+    redirect,
+    render_template,
+    request,
+    Response,
+    send_file,
+    stream_with_context,
+    url_for,
+)
 from flask_login import login_required, current_user
+from flask_restx import fields, Api
 
+from datetime import datetime
 from sqlalchemy import or_
+
+import json, tempfile
 
 from ..extensions import db
 from ..utils import timesince, random_password, format_date
@@ -14,13 +31,15 @@ from ..aggregation import GetProjectData, GetEventUsers
 
 from ..apiutils import *
 
-from datetime import datetime
-from flask import Response, stream_with_context, send_file
-
-import json, tempfile
-
 blueprint = Blueprint('api', __name__, url_prefix='/api')
+api = Api(blueprint, doc='/doc/')
 
+ns = api.namespace('projects', description='Interact with projects')
+project = api.model('Project', {
+    'name': fields.String,
+    'summary': fields.String,
+    'hashtag': fields.String,
+})
 
 # ------ EVENT INFORMATION ---------
 
