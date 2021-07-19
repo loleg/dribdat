@@ -1,0 +1,4 @@
+<div class="codeofconduct">Alle Teilnehmer*innen, Sponsor, Partner, Freiwilligen und Mitarbeiter*innen unseres Hackathons sind verpflichtet, dem <a href="https://hackcodeofconduct.org/" target="_blank">Hack Code of Conduct</a> zuzustimmen. Die Organisatoren werden diesen Kodex während der gesamten Veranstaltung durchsetzen. Wir erwarten die Zusammenarbeit aller Teilnehmer*innen, um eine sichere Umgebung für alle zu gewährleisten.</div>
+
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"><img align="left" style="margin-right:1em" alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>The contents of this website, unless otherwise stated, are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</p>
+
