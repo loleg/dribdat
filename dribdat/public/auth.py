@@ -14,7 +14,7 @@ from dribdat.sso.mattermost import mattermost
 # Dribdat modules
 from dribdat.user.models import User, Event, Role
 from dribdat.extensions import login_manager  # noqa: I005
-from dribdat.utils import flash_errors, random_password, sanitize_input
+from dribdat.utils import random_password, sanitize_input
 from dribdat.user.forms import RegisterForm, EmailForm, LoginForm, UserForm
 from dribdat.database import db
 from dribdat.mailer import user_activation
@@ -24,10 +24,16 @@ from dribdat.futures import UTC
 
 blueprint = Blueprint('auth', __name__, static_folder="../static")
 
-
 def current_event():
     """Return the first featured event."""
     return Event.query.filter_by(is_current=True).first()
+
+def flash_errors(form, category='warning'):
+    """Flash all errors for a form."""
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash('{0} - {1}'.format(
+                getattr(form, field).label.text, error), category)
 
 
 @login_manager.user_loader

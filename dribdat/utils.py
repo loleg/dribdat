@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Helper utilities and decorators."""
-from flask import flash, current_app
 from urllib.parse import quote
 from math import floor
 from os import path
@@ -49,17 +48,9 @@ def random_password(pwdlen=20):
                    for _ in range(pwdlen))
 
 
-def flash_errors(form, category='warning'):
-    """Flash all errors for a form."""
-    for field, errors in form.errors.items():
-        for error in errors:
-            flash('{0} - {1}'.format(
-                getattr(form, field).label.text, error), category)
-
-
-def get_time_note():
+def get_time_note(tz='UTC'):
     """Construct a time zone message."""
-    tz = timezone(current_app.config["TIME_ZONE"])
+    tz = timezone(tz)
     aware_time = datetime.now().astimezone(tz)
     tzinfo = "Server time: %s." % aware_time.strftime('%H:%M%z')
     if tz is not None:

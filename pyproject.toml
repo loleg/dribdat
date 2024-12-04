@@ -71,3 +71,7 @@ pyopenssl = "*"
 pytest = "*"
 WebTest = "*"
 coverage = "*"
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.1.1"
+

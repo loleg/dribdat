@@ -67,8 +67,9 @@ def index():
     if sum_hidden > 0:
         flash(('There are %d projects in the featured event ' % sum_hidden) + \
               ' that are hidden and may need moderation.', 'secondary')
+    timeinfo = get_time_note(current_app.config["TIME_ZONE"])
     return render_template('admin/index.html',
-                           stats=stats, timeinfo=get_time_note(),
+                           stats=stats, timeinfo=timeinfo,
                            default_event=current_event, active='index')
 
 
