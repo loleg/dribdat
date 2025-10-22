@@ -75,7 +75,7 @@ class Role(PkModel):
     """Loud and proud."""
 
     __tablename__ = "roles"
-    name = Column(db.String(80), unique=True, nullable=False)
+    name = Column(db.String(80), nullable=False)
 
     def __init__(self, name=None, **kwargs):
         """Create instance."""
@@ -96,8 +96,8 @@ class User(UserMixin, PkModel):
     """Just a regular Jane."""
 
     __tablename__ = "users"
-    username = Column(db.String(80), unique=True, nullable=False)
-    email = Column(db.String(80), unique=True, nullable=False)
+    username = Column(db.String(80), nullable=False)
+    email = Column(db.String(80), nullable=False)
     # TODO: cache the score from get_score()
 
     # My full name, for use in profile or certificate
@@ -446,7 +446,7 @@ class Event(PkModel):
     """What's the buzz? Tell me what's a-happening."""
 
     __tablename__ = "events"
-    name = Column(db.String(80), unique=True, nullable=False)
+    name = Column(db.String(80), nullable=False)
     summary = Column(db.String(140), nullable=True)  # a short description of the event
     hostname = Column(db.String(80), nullable=True)  # institution hosting the event
     hashtags = Column(
@@ -766,7 +766,7 @@ class Project(PkModel):
 
     __versioned__ = {}
     __tablename__ = "projects"
-    name = Column(db.String(80), unique=True, nullable=False)
+    name = Column(db.String(80), nullable=False)
     ident = Column(db.String(10), nullable=True)
     hashtag = Column(db.String(140), nullable=True)
     summary = Column(db.String(2048), nullable=True)

@@ -9,7 +9,8 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from micawber.providers import bootstrap_basic
 from whitenoise import WhiteNoise
 from urllib.parse import quote_plus
-from dribdat import commands, public, admin
+from dribdat import commands, public
+from dribdat.admin.setup import admin
 from dribdat.assets import assets  # noqa: I005
 from dribdat.sso import get_auth_blueprint
 from dribdat.extensions import (
@@ -68,6 +69,7 @@ def register_extensions(app):
     hashing.init_app(app)
     cache.init_app(app)
     db.init_app(app)
+    admin.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app, db)
     init_mailman(app)
@@ -101,8 +103,8 @@ def register_blueprints(app):
     app.register_blueprint(public.auth.blueprint)
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(public.feeds.blueprint)
-    app.register_blueprint(public.project.blueprint)
-    app.register_blueprint(admin.views.blueprint)
+    #app.register_blueprint(public.project.blueprint)
+    #app.register_blueprint(admin.views.blueprint)
     return None
 
 
